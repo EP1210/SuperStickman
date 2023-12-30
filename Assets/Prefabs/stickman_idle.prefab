@@ -12,9 +12,12 @@ GameObject:
   - component: {fileID: 16625463061921622}
   - component: {fileID: 8198449933667004525}
   - component: {fileID: 6768476144776315733}
-  m_Layer: 0
+  - component: {fileID: 7261358513769020723}
+  - component: {fileID: 141809950202060523}
+  - component: {fileID: 1639140585628786651}
+  m_Layer: 3
   m_Name: stickman_idle
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -119,7 +122,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 2.5, y: 5}
+  m_Size: {x: 2, y: 5}
   m_Direction: 0
 --- !u!50 &6768476144776315733
 Rigidbody2D:
@@ -137,7 +140,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 87fbe717c0aae1c458a87707773b0523, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -148,3 +151,57 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &7261358513769020723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6090746712605141084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89d06093c50604842829298ebdddc8bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idle: {fileID: 21300000, guid: 14f40acb2eb255947aec4182cf7c6e96, type: 3}
+  jump: {fileID: 21300000, guid: f355e52fa5696aa4c891f610c5d5bb09, type: 3}
+  duck: {fileID: 21300000, guid: 913dd898bb886b34bb00ac39d8b43a79, type: 3}
+  run: {fileID: 1639140585628786651}
+  slide: {fileID: 21300000, guid: ced12c84ab64aa24d93729206419d664, type: 3}
+--- !u!114 &141809950202060523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6090746712605141084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 912ab6893367245e8bae89ee8913b1e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 8
+  maxJumpHeight: 5
+  maxJumpTime: 1
+--- !u!114 &1639140585628786651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6090746712605141084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b25817c9febb9d94cb2bb29dff79f298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 8c8b65f709034a9408eabd79323de19d, type: 3}
+  - {fileID: 21300000, guid: ae2767fe987ce714abc08ee6ae907c4d, type: 3}
+  - {fileID: 21300000, guid: 92b58b99fb55b0243aa89e703b2235f1, type: 3}
+  - {fileID: 21300000, guid: c375d06019a2dc64f9d5823e562e4435, type: 3}
+  - {fileID: 21300000, guid: 20523dd3d650c8f4f9369e72bee82215, type: 3}
+  - {fileID: 21300000, guid: c375d06019a2dc64f9d5823e562e4435, type: 3}
+  - {fileID: 21300000, guid: 92b58b99fb55b0243aa89e703b2235f1, type: 3}
+  - {fileID: 21300000, guid: ae2767fe987ce714abc08ee6ae907c4d, type: 3}
+  framrate: 0.16666667
