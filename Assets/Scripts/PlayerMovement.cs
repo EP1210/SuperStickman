@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,6 +17,9 @@ public class PlayerMovement : MonoBehaviour
     // boolean with public getter but private setter
     public bool grounded { get; private set;}
     public bool jumping { get; private set;}
+    public bool running => Mathf.Abs(velocity.x) > 0.25f || Mathf.Abs(inputAxis) > 0.25f;
+    public bool sliding => (inputAxis > 0f && velocity.x < 0f) || (inputAxis < 0f && velocity.x > 0f);
+    public bool ducking { get; private set; } = false;
    
     private void Awake() 
     {
@@ -47,6 +48,18 @@ public class PlayerMovement : MonoBehaviour
         // set velocity to 0 when running against wall
         if (rigidbody.Raycast(Vector2.right * velocity.x)) {
             velocity.x = 0f;
+        }
+        
+        if (Input.GetButton("Vertical")) {
+           ducking = true; 
+        } else {
+            ducking = false;
+        }
+
+        if (velocity.x > 0f) {
+            transform.eulerAngles = Vector3.zero;
+        } else if (velocity.x < 0f) {
+            transform.eulerAngles = new Vector3(0f, 180f, 0f);
         }
     }
 
