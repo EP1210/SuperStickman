@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7929756123794745555}
   - component: {fileID: 8888442570372634322}
   - component: {fileID: 3561458110987737768}
+  - component: {fileID: -3764649236610887077}
   m_Layer: 6
   m_Name: Pen
   m_TagString: Untagged
@@ -114,7 +115,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &7929756123794745555
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -190,3 +191,15 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 84b946d47c51a8d4d9da3b75684525d8, type: 3}
   - {fileID: 21300000, guid: 68f6072db946eca4592617d72e6cd075, type: 3}
   framrate: 0.16666667
+--- !u!114 &-3764649236610887077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2781751694982756557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ea3afaf57d26964cb078e96e25e64da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
