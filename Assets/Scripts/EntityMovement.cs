@@ -44,12 +44,18 @@ public class EntityMovement : MonoBehaviour {
         //flip the direction at collission using Raycast from Extension
         if(m_rigidbody.Raycast(direction)) {
             direction = -direction;
+            if (velocity.x > 0f) {
+            transform.eulerAngles = Vector3.zero;
+            } else if (velocity.x < 0f) {
+            transform.eulerAngles = new Vector3(0f, 180f, 0f);
+        }
         }
 
         //setting the Y-Velocity to max 0 so the gravity dont add up all the time and ends at zero
         if (m_rigidbody.Raycast(Vector2.down)) {
             velocity.y = Mathf.Max(velocity.y, 0f);
         }
+
 
     }
 
