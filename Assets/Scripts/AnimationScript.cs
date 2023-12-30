@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class AnimationScript : MonoBehaviour {
-    // Array of spirtes so we can use more than one / again public so we can change it Unity itself 
+    // Array of sprites so we can use more than one / again public so we can change it Unity itself 
     public Sprite[] sprites;
     // 6 frame per second 
     public float framrate = 1f/6f;

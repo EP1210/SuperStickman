@@ -189,7 +189,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprites:
   - {fileID: 21300000, guid: 2e0e2e2cfc03f5546969b9c6540c7029, type: 3}
+  - {fileID: 21300000, guid: d05c179f8bd31bc448363405e2eb0359, type: 3}
   - {fileID: 21300000, guid: bb9d3d2c025207a4081353a2e5402afe, type: 3}
+  - {fileID: 21300000, guid: eac97b1a45347314eb9d7541f88ccd2b, type: 3}
+  - {fileID: 21300000, guid: bb9d3d2c025207a4081353a2e5402afe, type: 3}
+  - {fileID: 21300000, guid: d05c179f8bd31bc448363405e2eb0359, type: 3}
   framrate: 0.16666667
 --- !u!114 &4665941548162243304
 MonoBehaviour:
