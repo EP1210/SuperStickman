@@ -11,7 +11,16 @@ public static class Extensions
         }
 
         float radius = 0.25f;
-        float distance = 1.1f;
+        float distance = 0.5f;
+        /* set distance based on jumping or grounded (and movement)
+         1.1f for jumping, 0.5f for grounded movement -> come as close as possible to a block that you collided with */
+        if (Input.GetButton("Horizontal") && Input.GetButtonDown("Jump")) {
+            distance = 1.1f;
+        } else if (Input.GetButtonDown("Horizontal") && !Input.GetButtonDown("Jump")){
+            distance = 0.5f;
+        } else if (!Input.GetButtonDown("Horizontal") && Input.GetButtonDown("Jump")) {
+            distance = 1.1f;
+        }
 
         RaycastHit2D hit = Physics2D.CircleCast(rigidbody.position, radius, direction.normalized, distance, layerMask);
         // return true when we hit something and its not our own body

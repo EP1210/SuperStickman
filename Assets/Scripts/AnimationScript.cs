@@ -23,6 +23,7 @@ public class AnimationScript : MonoBehaviour {
         CancelInvoke();
     }
 
+    // animation of different sprites and their sequence
     private void Animate() {
         frame++;
         

@@ -11,22 +11,24 @@ public class PlayerMovement : MonoBehaviour
     public float movementSpeed = 8f;
     public float maxJumpHeight = 5f;
     public float maxJumpTime = 1f;
-    public float jumpForce => (2f * maxJumpHeight) / (maxJumpTime / 2f);
-    public float gravity => (-2f * maxJumpHeight) / Mathf.Pow((maxJumpTime / 2f),2);
+    public float jumpForce => 2f * maxJumpHeight / (maxJumpTime / 2f);
+    public float gravity => -2f * maxJumpHeight / Mathf.Pow(maxJumpTime / 2f,2);
     
     // boolean with public getter but private setter
     public bool grounded { get; private set;}
     public bool jumping { get; private set;}
-    public bool running => Mathf.Abs(velocity.x) > 0.25f || Mathf.Abs(inputAxis) > 0.25f;
+    public bool running  => Mathf.Abs(velocity.x) > 0.25f || Mathf.Abs(inputAxis) > 0.25f;
     public bool sliding => (inputAxis > 0f && velocity.x < 0f) || (inputAxis < 0f && velocity.x > 0f);
     public bool ducking { get; private set; } = false;
    
+    // unity awake method -> get player rigidbody and set camera
     private void Awake() 
     {
         rigidbody = GetComponent<Rigidbody2D>();
         camera = Camera.main;
     }
 
+    // unity update method to update rigidbody based on movement
     private void Update() 
     {
         HorizontalMovement();
@@ -40,29 +42,37 @@ public class PlayerMovement : MonoBehaviour
         ApplyGravity();
     }
 
+    // horizontal movement (x-axis, left or right), ducking logic
     private void HorizontalMovement()  
     {
-        inputAxis = Input.GetAxis("Horizontal");
-        velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * movementSpeed, movementSpeed * Time.deltaTime);
-
-        // set velocity to 0 when running against wall
-        if (rigidbody.Raycast(Vector2.right * velocity.x)) {
-            velocity.x = 0f;
-        }
-        
         if (Input.GetButton("Vertical")) {
-           ducking = true; 
+           ducking = true;
+           // movementSpeed = 4f;
+           velocity.x = Mathf.MoveTowards(velocity.x, 0f , movementSpeed*Time.deltaTime);
         } else {
             ducking = false;
-        }
+            // movementSpeed = 8f;
+        
+            inputAxis = Input.GetAxis("Horizontal");
+            velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * movementSpeed, movementSpeed * Time.deltaTime);
 
-        if (velocity.x > 0f) {
-            transform.eulerAngles = Vector3.zero;
-        } else if (velocity.x < 0f) {
-            transform.eulerAngles = new Vector3(0f, 180f, 0f);
+            // set velocity to 0 when running against wall
+            if (rigidbody.Raycast(Vector2.right * velocity.x)) {
+                // jumping = false;
+                velocity.x = 0f;
+            }
+            
+            
+
+            if (velocity.x > 0f) {
+                transform.eulerAngles = Vector3.zero;
+            } else if (velocity.x < 0f) {
+                transform.eulerAngles = new Vector3(0f, 180f, 0f);
+            }
         }
     }
 
+    // movement when you are on the ground, jumping logic
     private void GroundedMovement() 
     {
         velocity.y = Mathf.Max(velocity.y, 0f);
@@ -72,9 +82,12 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = jumpForce;
             jumping = true;
-        }
+        } 
+
+        jumping = false;
     }
 
+    // gravity for player (for example when jumping and then falling down)
     private void ApplyGravity()
     {
         bool falling = velocity.y < 0f || !Input.GetButton("Jump");
@@ -83,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
         velocity.y = Mathf.Max(velocity.y, gravity / 2f);
     }
 
+    // set screenborders (can't run out of screen), set fixed position of rigidbody
     private void FixedUpdate() 
     {
         Vector2 position = rigidbody.position;
@@ -95,6 +109,7 @@ public class PlayerMovement : MonoBehaviour
         rigidbody.MovePosition(position);
     }
 
+    // collision logic with power ups (power ups later developed ...) and bumping head on blocks
     private void OnCollisionEnter2D(Collision2D collision) 
     {
         if (collision.gameObject.layer != LayerMask.NameToLayer("PowerUp")) 

@@ -10,6 +10,7 @@ public class PlayerSpriteRenderer : MonoBehaviour
    public AnimationScript run;
    public Sprite slide;
 
+   // logic to set specific sprite for specific player action (jumping, sliding, ducking) and running with AnimationScript (due to multiple sprites)
 
    private void Awake()
    {

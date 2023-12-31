@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SideScrolling : MonoBehaviour
@@ -11,6 +9,7 @@ public class SideScrolling : MonoBehaviour
         player = GameObject.FindWithTag("Player").transform;
     }
 
+    // make the camera to follow the player and centralize player while running right
     private void LateUpdate()
     {
         Vector3 cameraPosition = transform.position;

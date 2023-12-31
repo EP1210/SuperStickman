@@ -939,10 +939,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -1802038585775668805, guid: f78048b360a2d8e40ae664705d1fa158, type: 3}
-      propertyPath: sprites.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4787407320526681667, guid: f78048b360a2d8e40ae664705d1fa158, type: 3}
       propertyPath: m_LocalPosition.x
       value: 39.7
@@ -990,10 +986,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8145829002990937054, guid: f78048b360a2d8e40ae664705d1fa158, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1778598616}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f78048b360a2d8e40ae664705d1fa158, type: 3}
 --- !u!1001 &1268545514
 PrefabInstance:
@@ -1547,23 +1540,6 @@ Transform:
   - {fileID: 1376276007}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1778598609 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8145829002990937054, guid: f78048b360a2d8e40ae664705d1fa158, type: 3}
-  m_PrefabInstance: {fileID: 1104296990}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1778598616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1778598609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ea3afaf57d26964cb078e96e25e64da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1781942861 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6090746712605141084, guid: b88f50e69bcd64236a3c3a1254e9ca80, type: 3}
@@ -1871,10 +1847,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pen
       objectReference: {fileID: 0}
-    - target: {fileID: 3561458110987737768, guid: ea896f3e123b3f44ca4f3fcefb21be7e, type: 3}
-      propertyPath: sprites.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2145,10 +2117,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1203379329030098323, guid: 5cce9323cd7e4d04c811cb4a21f24258, type: 3}
-      propertyPath: sprites.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6462947449943414642, guid: 5cce9323cd7e4d04c811cb4a21f24258, type: 3}
       propertyPath: m_LocalPosition.x
       value: 44.26
