@@ -112,11 +112,22 @@ public class PlayerMovement : MonoBehaviour
     // collision logic with power ups (power ups later developed ...) and bumping head on blocks
     private void OnCollisionEnter2D(Collision2D collision) 
     {
-        if (collision.gameObject.layer != LayerMask.NameToLayer("PowerUp")) 
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            if (transform.DotTest(collision.transform, Vector2.down))
+            {
+                velocity.y = jumpForce / 2f;
+                jumping = true;
+            }
+        }
+        
+        else if (collision.gameObject.layer != LayerMask.NameToLayer("PowerUp")) 
         {
             if (transform.DotTest(collision.transform, Vector2.up)) {
                 velocity.y=0f;
             }
         }
+
+        jumping = false;
     }
 }
