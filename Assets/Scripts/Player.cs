@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     private int currentHealth = 0;
 
      void Start(){
-
         currentHealth = initialHealth; 
     }
 
@@ -18,7 +17,7 @@ public class Player : MonoBehaviour
     }
 
   public void Hit(){
-    if (currentHealth > 0){
+    if (currentHealth > 1){
         currentHealth -= 1;
     } else {
         Death();
@@ -28,8 +27,7 @@ public class Player : MonoBehaviour
 
     public void Death(){
         deathAnimation.enabled = true;
-
-        //GameManager.Instance.ResetLevel(3f);
+        GameManager.Instance.ResetLevel(3f);
     }
 
   
