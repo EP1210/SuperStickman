@@ -9,19 +9,26 @@ public class EnemyStomp : MonoBehaviour {
 
         //check if the Player collision
         if(collision.gameObject.CompareTag("Player")) {
+
+            Player player = collision.gameObject.GetComponent<Player>();
             //check if the player jumped on the head 
             if(collision.transform.DotTest(transform, Vector2.down)) {
 
-                GetComponent<Collider2D>().enabled = false;
-                GetComponent<EntityMovement>().enabled = false;
-                GetComponent<AnimationScript>().enabled = false;
-                Destroy(gameObject, 0.5f);
-
+                Flatten();
+        
+            } else {
+                player.Hit();
             }
 
         }
     }
 
+    private void Flatten(){
+                GetComponent<Collider2D>().enabled = false;
+                GetComponent<EntityMovement>().enabled = false;
+                GetComponent<AnimationScript>().enabled = false;
+                Destroy(gameObject, 0.5f);
+    }
 
 
 
