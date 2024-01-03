@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     }
 
   public void Hit(){
-    if (currentHealth > 1){
+    if (currentHealth >= 1){
         currentHealth -= 1;
     } else {
         Death();
@@ -28,6 +28,12 @@ public class Player : MonoBehaviour
     public void Death(){
         deathAnimation.enabled = true;
         GameManager.Instance.ResetLevel(3f);
+    }
+
+    private void OnCollisionEnter2D (Collision2D collision) {
+        if (collision.gameObject.CompareTag("Water")) {
+            Death();
+        }
     }
 
   
