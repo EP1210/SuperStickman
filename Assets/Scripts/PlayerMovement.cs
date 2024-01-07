@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     public float maxJumpTime = 1f;
     public float jumpForce => 2f * maxJumpHeight / (maxJumpTime / 2f);
     public float gravity => -2f * maxJumpHeight / Mathf.Pow(maxJumpTime / 2f,2);
-    
     // boolean with public getter but private setter
     public bool grounded { get; private set;}
     public bool jumping { get; private set;}
@@ -50,6 +49,12 @@ public class PlayerMovement : MonoBehaviour
            // movementSpeed = 4f;
            velocity.x = Mathf.MoveTowards(velocity.x, 0f , movementSpeed*Time.deltaTime);
         } else {
+
+            // slowly set velocity to 0 while sliding -> 
+            if (sliding) {
+                velocity.x = Mathf.MoveTowards(velocity.x, 1f, movementSpeed*Time.deltaTime/2);            
+            }
+
             ducking = false;
             // movementSpeed = 8f;
         
