@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         camera = Camera.main;
+
     }
 
     // unity update method to update rigidbody based on movement
@@ -38,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
             GroundedMovement();
         }
 
+
         ApplyGravity();
     }
 
@@ -50,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
            velocity.x = Mathf.MoveTowards(velocity.x, 0f , movementSpeed*Time.deltaTime);
         } else {
 
-            // slowly set velocity to 0 while sliding -> 
+            // slowly set velocity to 1 while sliding -> makes sliding time shorter and gameplay smoother and easier to control the character
             if (sliding) {
                 velocity.x = Mathf.MoveTowards(velocity.x, 1f, movementSpeed*Time.deltaTime/2);            
             }

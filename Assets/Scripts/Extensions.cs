@@ -20,7 +20,7 @@ public static class Extensions
             distance = 0.5f;
         } else if (!Input.GetButtonDown("Horizontal") && Input.GetButtonDown("Jump")) {
             distance = 1.1f;
-        }
+        } 
 
         RaycastHit2D hit = Physics2D.CircleCast(rigidbody.position, radius, direction.normalized, distance, layerMask);
         // return true when we hit something and its not our own body

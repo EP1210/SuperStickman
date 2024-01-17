@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class Endpoint : MonoBehaviour
@@ -12,7 +14,9 @@ public class Endpoint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // StartCoroutine(MoveTo(bottom, door.position));
+            Player player = other.gameObject.GetComponent<Player>();
+            Console.WriteLine(player.score);
+            //player.transform.position = Vector3.MoveTowards(player.transform.position, new Vector3(0, -3, 0), Time.deltaTime*speed);
             StartCoroutine(LevelCompleteSequence(other.transform));
         }
     }
@@ -20,6 +24,8 @@ public class Endpoint : MonoBehaviour
     private IEnumerator LevelCompleteSequence(Transform player)
     {
         player.GetComponent<PlayerMovement>().enabled = false;
+
+        MoveTo(player.transform, Vector3.down);
 
         yield return MoveTo(player, door.position);
 

@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class EnemyStomp : MonoBehaviour {
 
@@ -13,7 +14,8 @@ public class EnemyStomp : MonoBehaviour {
             Player player = collision.gameObject.GetComponent<Player>();
             //check if the player jumped on the head 
             if(collision.transform.DotTest(transform, Vector2.down)) {
-
+                
+                player.score++;
                 Flatten();
         
             } else {

@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     private DeathAnimation deathAnimation;
     private int initialHealth = 3;
     private int currentHealth = 0;
+    public int score = 0;
 
      void Start(){
         currentHealth = initialHealth; 
