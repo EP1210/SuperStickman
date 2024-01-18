@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     LoadLevel(1, 1);
   }
 
-  private void LoadLevel(int world, int stage) {
+  public void LoadLevel(int world, int stage) {
     this.world = world;
     this.stage = stage;
 
@@ -54,12 +54,12 @@ public class GameManager : MonoBehaviour
     if (lives > 0) {
         LoadLevel(world, stage);
     } else {
-        GameOver();
+        NewGame();
     }
   }
 
-  private void GameOver() {
-    NewGame();
+  public void SelectLevel(int level){
+    LoadLevel(1,level);
   }
 
   public void QuitGame(){
