@@ -12,14 +12,14 @@ public class GameManager : MonoBehaviour
   public int lives { get; private set;}
 
     // just creates on scene and destroy if there are more 
-  private void Awake(){
-    if (Instance != null) {
-        DestroyImmediate(gameObject);
-    } else {
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-  }
+  // private void Awake(){
+  //   if (Instance != null) {
+  //       DestroyImmediate(gameObject);
+  //   } else {
+  //       Instance = this;
+  //       DontDestroyOnLoad(gameObject);
+  //   }
+  // }
 
   private void OnDestroy() {
     if(Instance == this) {
@@ -28,11 +28,8 @@ public class GameManager : MonoBehaviour
   }
 
 
-  private void Start() {
-    NewGame();
-  }
 
-  private void NewGame() {
+  public void NewGame() {
     lives = 3;
     LoadLevel(1, 1);
   }
@@ -63,6 +60,10 @@ public class GameManager : MonoBehaviour
 
   private void GameOver() {
     NewGame();
+  }
+
+  public void QuitGame(){
+    Application.Quit();
   }
 
 }
