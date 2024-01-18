@@ -41,6 +41,9 @@ public class Player : MonoBehaviour
     {
         deathAnimation.enabled = true;
         GameManager.Instance.ResetLevel(3f);
+        // Set all hearts to empty when the player dies
+        currentHealth = 0;
+        UpdateHeartsUI();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -48,6 +51,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Water"))
         {
             Death();
+            
         }
     }
 
@@ -60,11 +64,13 @@ public class Player : MonoBehaviour
             {
                 // Display full hearts for remaining health
                 hearts[i].sprite = fullHeart;
+                hearts[i].enabled = true; // Ensure the image component is enabled
             }
             else
             {
                 // Display empty hearts for lost health
                 hearts[i].sprite = emptyHeart;
+                hearts[i].enabled = true; // Ensure the image component is enabled
             }
         }
     }
