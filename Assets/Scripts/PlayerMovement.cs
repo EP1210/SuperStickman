@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     private new Rigidbody2D rigidbody;
     private Vector2 velocity;
     private float inputAxis;
+    private CapsuleCollider2D capsuleCollider;
   
     // variables
     public float movementSpeed = 8f;
@@ -24,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake() 
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
         camera = Camera.main;
 
     }
@@ -51,7 +53,6 @@ public class PlayerMovement : MonoBehaviour
            // movementSpeed = 4f;
            velocity.x = Mathf.MoveTowards(velocity.x, 0f , movementSpeed*Time.deltaTime);
         } else {
-
             // slowly set velocity to 1 while sliding -> makes sliding time shorter and gameplay smoother and easier to control the character
             if (sliding) {
                 velocity.x = Mathf.MoveTowards(velocity.x, 1f, movementSpeed*Time.deltaTime/2);            

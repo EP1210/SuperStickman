@@ -1,16 +1,19 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    public PlayerSpriteRenderer activeRenderer;
     private DeathAnimation deathAnimation;
-    private int maxHealth = 3;
-    private int currentHealth;
+    public int maxHealth = 3;
+    public int currentHealth;
     public int score = 0;
-
-    public Image[] hearts;
+    public string[] accquiredPowerUps;  
+    public Image[] hearts; 
     public Sprite fullHeart;
     public Sprite emptyHeart;
+    public bool invincible {get; private set;}
 
     void Start()
     {
@@ -25,8 +28,10 @@ public class Player : MonoBehaviour
 
     public void Hit()
     {
-        if (currentHealth > 0)
+        if (!invincible)
         {
+            if (currentHealth > 0)
+            {
             currentHealth -= 1;
             UpdateHeartsUI(); // Update the UI when the player is hit
 
@@ -34,7 +39,9 @@ public class Player : MonoBehaviour
             {
                 Death();
             }
+            }
         }
+        
     }
 
     public void Death()
@@ -56,7 +63,7 @@ public class Player : MonoBehaviour
     }
 
     // Update the UI to reflect the current health
-    private void UpdateHeartsUI()
+    public void UpdateHeartsUI()
     {
         for (int i = 0; i < hearts.Length; i++)
         {
@@ -74,4 +81,31 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    public void Invincibilty(float duration = 10f)
+    {
+        StartCoroutine(InvincibleAnimation(duration));
+
+    }
+
+    private IEnumerator InvincibleAnimation(float duration)
+    {
+        invincible = true;
+        float elapsed = 0f;
+        
+        while (elapsed < duration) {
+            elapsed+=Time.deltaTime;
+
+            if (Time.frameCount % 4 == 0) {
+                //activeRenderer.spriteRenderer.color = Random.ColorHSV(0f, 1f, 1f, 1f, 1f, 1f);
+                activeRenderer.spriteRenderer.size = new Vector2(3.5f,6f);
+            }
+            yield return null;
+        }
+
+        activeRenderer.spriteRenderer.color = Color.white;
+        activeRenderer.spriteRenderer.size = new Vector2(2.5f, 5f);
+        invincible = false;
+    }
 }
+ 
