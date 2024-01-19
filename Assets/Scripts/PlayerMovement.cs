@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     public bool running  => Mathf.Abs(velocity.x) > 0.25f || Mathf.Abs(inputAxis) > 0.25f;
     public bool sliding => (inputAxis > 0f && velocity.x < 0f) || (inputAxis < 0f && velocity.x > 0f);
     public bool ducking { get; private set; } = false;
+
+    [SerializeField] private AudioSource jumpingSound;
    
     // unity awake method -> get player rigidbody and set camera
     private void Awake() 
@@ -89,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             velocity.y = jumpForce;
+            jumpingSound.Play();
             jumping = true;
         } 
 
