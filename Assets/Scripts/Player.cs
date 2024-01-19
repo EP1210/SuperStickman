@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public Image[] hearts; 
     public Sprite fullHeart;
     public Sprite emptyHeart;
+    private bool hasTouchedWater = false;
     public bool invincible {get; private set;}
 
     void Start()
@@ -44,43 +45,50 @@ public class Player : MonoBehaviour
         
     }
 
-    public void Death()
-    {
-        deathAnimation.enabled = true;
-        GameManager.Instance.ResetLevel(3f);
-        // Set all hearts to empty when the player dies
-        currentHealth = 0;
-        UpdateHeartsUI();
-    }
+public void Death()
+{
+    deathAnimation.enabled = true;
+    // Set all hearts to empty when the player dies
+    currentHealth = 0;
+    UpdateHeartsUI();
+     GameManager.instance.RestartLevel();
+}
 
-    private void OnCollisionEnter2D(Collision2D collision)
+private void OnCollisionEnter2D(Collision2D collision)
+{
+    if (collision.gameObject.CompareTag("Water"))
     {
-        if (collision.gameObject.CompareTag("Water"))
+        // Set flag indicating that the player touched water
+        hasTouchedWater = true;
+        Death();
+    }
+}
+
+// Update the UI to reflect the current health
+public void UpdateHeartsUI()
+{
+    for (int i = 0; i < hearts.Length; i++)
+    {
+        if (i < currentHealth && hasTouchedWater)
         {
-            Death();
-            
+            // Display empty hearts for remaining health if player has touched water
+            hearts[i].sprite = emptyHeart;
+            hearts[i].enabled = true; // Ensure the image component is enabled
+        }
+        else if (i < currentHealth && !hasTouchedWater)
+        {
+            // Display full hearts for remaining health if not touched water
+            hearts[i].sprite = fullHeart;
+            hearts[i].enabled = true; // Ensure the image component is enabled
+        }
+        else
+        {
+            // Display empty hearts for lost health or if touched water
+            hearts[i].sprite = emptyHeart;
+            hearts[i].enabled = true; // Ensure the image component is enabled
         }
     }
-
-    // Update the UI to reflect the current health
-    public void UpdateHeartsUI()
-    {
-        for (int i = 0; i < hearts.Length; i++)
-        {
-            if (i < currentHealth)
-            {
-                // Display full hearts for remaining health
-                hearts[i].sprite = fullHeart;
-                hearts[i].enabled = true; // Ensure the image component is enabled
-            }
-            else
-            {
-                // Display empty hearts for lost health
-                hearts[i].sprite = emptyHeart;
-                hearts[i].enabled = true; // Ensure the image component is enabled
-            }
-        }
-    }
+}
 
     public void Invincibilty(float duration = 10f)
     {
