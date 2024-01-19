@@ -15,8 +15,16 @@ public class Endpoint : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Player player = other.gameObject.GetComponent<Player>();
+            if (player.invincible) {
+                player.score+=20;
+            }
+            if (player.currentHealth == 3) {
+                player.score+=20;
+            }
             player.score +=5;
-            Console.WriteLine(player.score);
+            player.StartCoroutine(player.ScoreHighlights());
+            player.UpdateScoreUI();
+           
             //player.transform.position = Vector3.MoveTowards(player.transform.position, new Vector3(0, -3, 0), Time.deltaTime*speed);
             StartCoroutine(LevelCompleteSequence(other.transform));
         }

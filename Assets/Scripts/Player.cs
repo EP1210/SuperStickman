@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,17 +10,25 @@ public class Player : MonoBehaviour
     public int maxHealth = 3;
     public int currentHealth;
     public int score = 0;
-    public string[] accquiredPowerUps;  
+    public bool hasRubber = false;
+    public bool hasTipex = false;
     public Image[] hearts; 
     public Sprite fullHeart;
     public Sprite emptyHeart;
     private bool hasTouchedWater = false;
     public bool invincible {get; private set;}
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI invicibleText;
+    public TextMeshProUGUI highlightText;
+
 
     void Start()
     {
         currentHealth = maxHealth;
         UpdateHeartsUI();
+        UpdateScoreUI();
+        StartCoroutine(UpdateInvicibleUI());
+        StartCoroutine(ScoreHighlights());
     }
 
     private void Awake()
@@ -90,7 +99,7 @@ public void UpdateHeartsUI()
     }
 }
 
-    public void Invincibilty(float duration = 10f)
+    public void Invincibilty(float duration = 5f)
     {
         StartCoroutine(InvincibleAnimation(duration));
 
@@ -99,6 +108,7 @@ public void UpdateHeartsUI()
     private IEnumerator InvincibleAnimation(float duration)
     {
         invincible = true;
+        StartCoroutine(UpdateInvicibleUI());
         float elapsed = 0f;
         
         while (elapsed < duration) {
@@ -114,6 +124,61 @@ public void UpdateHeartsUI()
         activeRenderer.spriteRenderer.color = Color.white;
         activeRenderer.spriteRenderer.size = new Vector2(2.5f, 5f);
         invincible = false;
+        StartCoroutine(UpdateInvicibleUI());
     }
+
+    public void UpdateScoreUI()
+    {
+        scoreText.text = "Score: " + score.ToString();
+    }
+
+    public IEnumerator UpdateInvicibleUI()
+    {
+        if (invincible) {
+            float elapsed=0f;
+            float time = 5f;
+            while (elapsed<time) {
+                invicibleText.text = "INVINCIBLE(" + Mathf.Ceil(time-elapsed) + "s)";
+                elapsed+=Time.deltaTime;
+                yield return null;
+            } 
+        } else {
+            invicibleText.text = " ";
+        }
+    }
+
+    public IEnumerator ScoreHighlights()
+    {
+    float elapsedTime = 0f;
+    float displayTime = 3f;
+
+    while (elapsedTime < displayTime)
+    {
+        UpdateHighlightText();
+        elapsedTime += Time.deltaTime;
+        yield return null;
+    }
+    highlightText.text = "";
+    }
+
+    private void UpdateHighlightText()
+    {
+        switch (score)
+        {
+            case 5:
+                highlightText.text = "DOMINANT";
+                break;
+            case 10:
+                highlightText.text = "MONSTER";
+                break;
+            case 20:
+                highlightText.text = "DEMOOOON";
+                break;
+            default:
+                highlightText.text = "";
+                break;
+        }
+    }
+
 }
  

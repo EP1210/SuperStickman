@@ -15,11 +15,15 @@ public class EnemyStomp : MonoBehaviour {
             //check if the player jumped on the head 
             if(collision.transform.DotTest(transform, Vector2.down)) {
                 
-                player.score++;
+                player.score+=2;
+                player.UpdateScoreUI();
+                player.StartCoroutine(player.ScoreHighlights());
                 Flatten();
         
             } else {
                 player.Hit();
+                player.score--;
+                player.UpdateScoreUI();
             }
 
         }
