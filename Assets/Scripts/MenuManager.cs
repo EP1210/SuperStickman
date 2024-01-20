@@ -16,11 +16,19 @@ public class MenuManager : MonoBehaviour
     }
 
     public void LoadCurrentLevel(){
+        Debug.Log("Tryagain");
         SceneManager.LoadScene($"1-{MenuManager.level}");
     }
 
+    public void LoadMainMenu(){
+        Debug.Log("LOADMAINMENU");
+        SceneManager.LoadScene("main_menu");
+    }
+
     public void NextLevel() {
-        LoadLevel(MenuManager.level +1);
+        Debug.Log("NEXTLVL");
+        MenuManager.level = MenuManager.level+1;
+        LoadLevel(MenuManager.level);
     }
 
     public void QuitGame(){

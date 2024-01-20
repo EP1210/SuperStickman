@@ -8,6 +8,7 @@ public class Endpoint : MonoBehaviour
     public Transform bottom;
     public Transform door;
     public float speed = 6f;
+    private int playerscore;
 
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -28,6 +29,7 @@ public class Endpoint : MonoBehaviour
            
             //player.transform.position = Vector3.MoveTowards(player.transform.position, new Vector3(0, -3, 0), Time.deltaTime*speed);
             StartCoroutine(LevelCompleteSequence(other.transform));
+            playerscore = player.score;
         }
     }
 
@@ -39,6 +41,7 @@ public class Endpoint : MonoBehaviour
 
         yield return MoveTo(player, door.position);
         player.gameObject.SetActive(false);
+        GameManager.instance.EndMenu(playerscore);
     }
 
     private IEnumerator MoveTo(Transform subject, Vector3 destination)

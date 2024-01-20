@@ -11,6 +11,7 @@ TagManager:
   - Pencil
   - Pen
   - Brush
+  - endscreenscore
   layers:
   - Default
   - TransparentFX
