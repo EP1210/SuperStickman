@@ -22,6 +22,7 @@ public class PowerUp : MonoBehaviour
     {
         Player player = _player.GetComponent<Player>();
         PlayerMovement movement = _player.GetComponent<PlayerMovement>();
+        player.pickUpPowerUpSound.Play();
 
         switch (type)
         {

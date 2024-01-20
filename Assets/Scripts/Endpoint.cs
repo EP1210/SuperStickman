@@ -9,12 +9,14 @@ public class Endpoint : MonoBehaviour
     public Transform bottom;
     public Transform door;
     public float speed = 6f;
+    // [SerializeField] public AudioSource endSound;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             Player player = other.gameObject.GetComponent<Player>();
+            
             if (player.invincible) {
                 player.score+=20;
             }
@@ -37,12 +39,12 @@ public class Endpoint : MonoBehaviour
         MoveTo(player.transform, Vector3.down);
 
         yield return MoveTo(player, door.position);
-
         player.gameObject.SetActive(false);
     }
 
     private IEnumerator MoveTo(Transform subject, Vector3 destination)
     {
+        // endSound.Play();
         while (Vector3.Distance(subject.position, destination) > 0.125f)
         {
             subject.position = Vector3.MoveTowards(subject.position, destination, speed * Time.deltaTime);

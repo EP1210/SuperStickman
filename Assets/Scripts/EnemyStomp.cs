@@ -20,11 +20,10 @@ public class EnemyStomp : MonoBehaviour {
 
 
         if(collision.gameObject.CompareTag("Player")) {
-
             Player player = collision.gameObject.GetComponent<Player>();
             //check if the player jumped on the head 
             if(collision.transform.DotTest(transform, Vector2.down)) {
-                
+                player.stompingSound.Play();
                 player.score+=2;
                 if (player.rubberActive && enemy=="Pencil") {
                     player.score+=10;

@@ -26,6 +26,10 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI rubberText;
     public TextMeshProUGUI tipexText;
     public TextMeshProUGUI obtainedPowerUps;
+    [SerializeField] public AudioSource stompingSound;
+    [SerializeField] public AudioSource hurtSound;
+    [SerializeField] public AudioSource pickUpPowerUpSound;
+    // [SerializeField] public AudioSource deathSound;
 
 
     void Start()
@@ -43,6 +47,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         Reactivate();
+
     }
 
     private void Awake()
@@ -57,10 +62,12 @@ public class Player : MonoBehaviour
             if (currentHealth > 0)
             {
             currentHealth -= 1;
+            hurtSound.Play();
             UpdateHeartsUI(); // Update the UI when the player is hit
 
             if (currentHealth == 0)
             {
+                // deathSound.Play();
                 Death();
             }
             }
@@ -237,6 +244,7 @@ public void UpdateHeartsUI()
     public async void Reactivate() {
         PlayerMovement movement = gameObject.GetComponent<PlayerMovement>();
         if (hasRubber && Input.GetButtonDown("Fire1") && !rubberActive) {
+            pickUpPowerUpSound.Play();
             rubberActive = true;
             JumpBoost();
             movement.maxJumpHeight = 7f;
@@ -246,6 +254,7 @@ public void UpdateHeartsUI()
             JumpBoost();
         }
         if (hasTipex && Input.GetButtonDown("Fire2") && !tipexActive) {
+            pickUpPowerUpSound.Play();
             tipexActive = true;
             SpeedBoost();
             movement.movementSpeed = 12f;
@@ -266,6 +275,7 @@ public void UpdateHeartsUI()
         } 
         obtainedPowerUps.text = s;
     }
+
 
 }
  
