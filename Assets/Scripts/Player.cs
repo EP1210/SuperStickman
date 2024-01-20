@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,8 @@ public class Player : MonoBehaviour
     public int score = 0;
     public bool hasRubber = false;
     public bool hasTipex = false;
+    public bool rubberActive = false;
+    public bool tipexActive = false;
     public Image[] hearts; 
     public Sprite fullHeart;
     public Sprite emptyHeart;
@@ -20,6 +23,9 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI invicibleText;
     public TextMeshProUGUI highlightText;
+    public TextMeshProUGUI rubberText;
+    public TextMeshProUGUI tipexText;
+    public TextMeshProUGUI obtainedPowerUps;
 
 
     void Start()
@@ -27,8 +33,16 @@ public class Player : MonoBehaviour
         currentHealth = maxHealth;
         UpdateHeartsUI();
         UpdateScoreUI();
+        StartCoroutine(UpdateRubberUI());
+        StartCoroutine(UpdateTipexUI());
         StartCoroutine(UpdateInvicibleUI());
         StartCoroutine(ScoreHighlights());
+        ObtainedPowerUps();
+    }
+
+    void Update()
+    {
+        Reactivate();
     }
 
     private void Awake()
@@ -99,12 +113,14 @@ public void UpdateHeartsUI()
     }
 }
 
+    // function to call when invincibility active
     public void Invincibilty(float duration = 5f)
     {
         StartCoroutine(InvincibleAnimation(duration));
 
     }
 
+    // invincible timer
     private IEnumerator InvincibleAnimation(float duration)
     {
         invincible = true;
@@ -113,25 +129,19 @@ public void UpdateHeartsUI()
         
         while (elapsed < duration) {
             elapsed+=Time.deltaTime;
-
-            if (Time.frameCount % 4 == 0) {
-                //activeRenderer.spriteRenderer.color = Random.ColorHSV(0f, 1f, 1f, 1f, 1f, 1f);
-                activeRenderer.spriteRenderer.size = new Vector2(3.5f,6f);
-            }
             yield return null;
         }
-
-        activeRenderer.spriteRenderer.color = Color.white;
-        activeRenderer.spriteRenderer.size = new Vector2(2.5f, 5f);
         invincible = false;
         StartCoroutine(UpdateInvicibleUI());
     }
 
+    // update score ui, called after killing enemy and reaching end of level
     public void UpdateScoreUI()
     {
         scoreText.text = "Score: " + score.ToString();
     }
 
+    // update invincible text (countdown from 5)
     public IEnumerator UpdateInvicibleUI()
     {
         if (invincible) {
@@ -147,6 +157,7 @@ public void UpdateHeartsUI()
         }
     }
 
+    // timer for displaying highlight text
     public IEnumerator ScoreHighlights()
     {
     float elapsedTime = 0f;
@@ -161,6 +172,7 @@ public void UpdateHeartsUI()
     highlightText.text = "";
     }
 
+    // highlight text 
     private void UpdateHighlightText()
     {
         switch (score)
@@ -178,6 +190,81 @@ public void UpdateHeartsUI()
                 highlightText.text = "";
                 break;
         }
+    }
+
+    // jump boost text
+    public void JumpBoost() {
+        StartCoroutine(UpdateRubberUI());
+    }
+    public IEnumerator UpdateRubberUI()
+    {
+        if (rubberActive) {
+            float elapsed=0f;
+            float time = 5f;
+            while (elapsed<time) {
+                rubberText.text = "JUMP BOOST(" + Mathf.Ceil(time-elapsed) + "s)";
+                elapsed+=Time.deltaTime;
+                yield return null;
+            } 
+        } else {
+
+            rubberText.text = " ";
+        }
+    }
+
+    // speed boost text
+    public void SpeedBoost() {
+        StartCoroutine(UpdateTipexUI());
+    }
+
+    public IEnumerator UpdateTipexUI()
+    {
+        if (tipexActive) {
+            float elapsed=0f;
+            float time = 5f;
+            while (elapsed<time) {
+                tipexText.text = "SPEED BOOST(" + Mathf.Ceil(time-elapsed) + "s)";
+                elapsed+=Time.deltaTime;
+                yield return null;
+            } 
+        } else {
+            tipexText.text = " ";
+        }
+    }
+
+
+    // function to reactive obtained power ups
+    public async void Reactivate() {
+        PlayerMovement movement = gameObject.GetComponent<PlayerMovement>();
+        if (hasRubber && Input.GetButtonDown("Fire1") && !rubberActive) {
+            rubberActive = true;
+            JumpBoost();
+            movement.maxJumpHeight = 7f;
+            await Task.Delay(5000);
+            movement.maxJumpHeight = 5f;
+            rubberActive = false;
+            JumpBoost();
+        }
+        if (hasTipex && Input.GetButtonDown("Fire2") && !tipexActive) {
+            tipexActive = true;
+            SpeedBoost();
+            movement.movementSpeed = 12f;
+            await Task.Delay(5000);
+            movement.movementSpeed = 8f;
+            tipexActive = false;
+            SpeedBoost();
+        }
+    }
+
+    public void ObtainedPowerUps() {
+        string s ="";
+        if (hasRubber) {
+            s+="Rubber: available (R)"+"\n";
+        } 
+        if (hasTipex) {
+            s+="Tipex: available (F)"+"\n";
+        } 
+        obtainedPowerUps.text = s;
     }
 
 }
