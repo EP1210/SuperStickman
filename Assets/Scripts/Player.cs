@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     [SerializeField] public AudioSource hurtSound;
     [SerializeField] public AudioSource pickUpPowerUpSound;
     // [SerializeField] public AudioSource deathSound;
+    [SerializeField] public AudioSource endSound;
 
 
     void Start()
