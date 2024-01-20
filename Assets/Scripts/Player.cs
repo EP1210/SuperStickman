@@ -169,7 +169,7 @@ public void UpdateHeartsUI()
     {
     float elapsedTime = 0f;
     float displayTime = 3f;
-
+    highlightText.text = "";
     while (elapsedTime < displayTime)
     {
         UpdateHighlightText();
@@ -192,9 +192,6 @@ public void UpdateHeartsUI()
                 break;
             case 20:
                 highlightText.text = "DEMOOOON";
-                break;
-            default:
-                highlightText.text = "";
                 break;
         }
     }
