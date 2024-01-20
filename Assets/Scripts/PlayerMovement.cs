@@ -22,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
     public bool ducking { get; private set; } = false;
 
     [SerializeField] private AudioSource jumpingSound;
-    [SerializeField] private AudioSource walkingSound;
    
     // unity awake method -> get player rigidbody and set camera
     private void Awake() 
@@ -71,12 +70,6 @@ public class PlayerMovement : MonoBehaviour
             if (rigidbody.Raycast(Vector2.right * velocity.x)) {
                 // jumping = false;
                 velocity.x = 0f;
-            }
-            
-             // Check if the character is moving horizontally (left or right)
-            if (Mathf.Abs(velocity.x) > 0.01f) {
-            // Play walking sound
-                walkingSound.Play();
             }
 
             if (velocity.x > 0f) {
