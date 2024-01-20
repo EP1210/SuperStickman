@@ -8,6 +8,9 @@ TagManager:
   - Opaque_White
   - Rubber
   - Tipex
+  - Pencil
+  - Pen
+  - Brush
   layers:
   - Default
   - TransparentFX

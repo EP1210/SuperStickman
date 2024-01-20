@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
@@ -8,7 +9,16 @@ public class EnemyStomp : MonoBehaviour {
 
     private void OnCollisionEnter2D (Collision2D collision){
 
-        //check if the Player collision
+        string enemy = "";
+        if (gameObject.CompareTag("Pen")) {
+            enemy="Pen";
+        } else if (gameObject.CompareTag("Pencil")) {
+            enemy="Pencil";
+        } else {
+            enemy = "Brush";
+        }
+
+
         if(collision.gameObject.CompareTag("Player")) {
 
             Player player = collision.gameObject.GetComponent<Player>();
@@ -16,6 +26,13 @@ public class EnemyStomp : MonoBehaviour {
             if(collision.transform.DotTest(transform, Vector2.down)) {
                 
                 player.score+=2;
+                if (player.rubberActive && enemy=="Pencil") {
+                    player.score+=10;
+                } else if (player.tipexActive && enemy =="Pen") {
+                    player.score+=10;
+                } else if (player.invincible && enemy =="Brush") {
+                    player.score+=10;
+                }
                 player.UpdateScoreUI();
                 player.StartCoroutine(player.ScoreHighlights());
                 Flatten();
