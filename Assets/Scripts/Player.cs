@@ -29,9 +29,9 @@ public class Player : MonoBehaviour
     [SerializeField] public AudioSource stompingSound;
     [SerializeField] public AudioSource hurtSound;
     [SerializeField] public AudioSource pickUpPowerUpSound;
-    // [SerializeField] public AudioSource deathSound;
     [SerializeField] public AudioSource endSound;
-
+    [SerializeField] public AudioSource deathSound;
+    [SerializeField] public AudioSource startingSound;
 
     void Start()
     {
@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
         StartCoroutine(UpdateInvicibleUI());
         StartCoroutine(ScoreHighlights());
         ObtainedPowerUps();
+        startingSound.Play();
     }
 
     void Update()
@@ -68,8 +69,9 @@ public class Player : MonoBehaviour
 
             if (currentHealth == 0)
             {
-                // deathSound.Play();
+                
                 Death();
+                
             }
             }
         }
@@ -82,7 +84,11 @@ public void Death()
     // Set all hearts to empty when the player dies
     currentHealth = 0;
     UpdateHeartsUI();
-     GameManager.instance.RestartLevel();
+    GameManager.instance.RestartLevel();
+    deathSound.Play();
+    
+    
+
 }
 
 private void OnCollisionEnter2D(Collision2D collision)

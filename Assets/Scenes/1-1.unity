@@ -1953,6 +1953,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 706432088027962127, guid: b88f50e69bcd64236a3c3a1254e9ca80, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2815680358620173641, guid: b88f50e69bcd64236a3c3a1254e9ca80, type: 3}
       propertyPath: endSound
       value: 
@@ -1997,6 +2001,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stickman_idle
       objectReference: {fileID: 0}
+    - target: {fileID: 6176161321775192011, guid: b88f50e69bcd64236a3c3a1254e9ca80, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
     - target: {fileID: 8568206467905266027, guid: b88f50e69bcd64236a3c3a1254e9ca80, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.59
