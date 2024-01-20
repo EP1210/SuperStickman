@@ -5,17 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    public int level {get; private set;}
+    public static int level;
 
     public void LoadLevel(int level) {
         //this.world = world;
-        this.level = level;
+        MenuManager.level = level;
+        //GameManager.level = level;
 
         SceneManager.LoadScene($"1-{level}");
     }
 
+    public void LoadCurrentLevel(){
+        SceneManager.LoadScene($"1-{MenuManager.level}");
+    }
+
     public void NextLevel() {
-        LoadLevel(level +1);
+        LoadLevel(MenuManager.level +1);
     }
 
     public void QuitGame(){

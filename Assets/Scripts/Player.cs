@@ -35,6 +35,12 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        scoreText.text = "";
+        invicibleText.text = "";
+        highlightText.text = "";
+        rubberText.text = "";
+        tipexText.text = "";
+        obtainedPowerUps.text = "";
         currentHealth = maxHealth;
         UpdateHeartsUI();
         UpdateScoreUI();
