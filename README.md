@@ -2,6 +2,8 @@
 Super Stickman, a unique game inspired by the Super Mario Series.
 
 # How to play the game:
+Inside of ProjectFolder =>
+
 ## Windows
 Start **Build/windows/SuperStickman.exe**
 
