@@ -6,7 +6,7 @@ Super Stickman, a unique game inspired by the Super Mario Series.
 Start **Build/windows/SuperStickman.exe**
 
 ## MacOS
-Start **Build/macOS/Super_Stickman.app**
+Start **Build/macOS/SuperStickman.app**
 
 ## Unity
 1. Open Scene main_menu
