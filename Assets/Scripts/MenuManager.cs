@@ -7,6 +7,10 @@ public class MenuManager : MonoBehaviour
 {
     public static int level;
 
+    void Awake(){
+        MenuManager.level = 1;
+    }
+
     public void LoadLevel(int level) {
         //this.world = world;
         MenuManager.level = level;
