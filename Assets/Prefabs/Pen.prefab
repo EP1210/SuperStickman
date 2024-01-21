@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -3764649236610887077}
   m_Layer: 6
   m_Name: Pen
-  m_TagString: Untagged
+  m_TagString: Pen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
