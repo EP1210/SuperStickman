@@ -7,12 +7,10 @@ public class MenuManager : MonoBehaviour
 {
     public static int level;
 
-    void Awake(){
-        MenuManager.level = 1;
-    }
 
     public void LoadLevel(int level) {
         //this.world = world;
+
         MenuManager.level = level;
         //GameManager.level = level;
 
@@ -21,6 +19,9 @@ public class MenuManager : MonoBehaviour
 
     public void LoadCurrentLevel(){
         Debug.Log("Tryagain");
+        if(MenuManager.level == 0){
+            MenuManager.level = 1;
+        }
         SceneManager.LoadScene($"1-{MenuManager.level}");
     }
 
@@ -31,8 +32,12 @@ public class MenuManager : MonoBehaviour
 
     public void NextLevel() {
         Debug.Log("NEXTLVL");
-        MenuManager.level = MenuManager.level+1;
-        LoadLevel(MenuManager.level);
+        if(MenuManager.level == 3){
+            SceneManager.LoadScene("main_menu");
+        }else{
+            MenuManager.level = MenuManager.level+1;
+            LoadLevel(MenuManager.level);
+        }
     }
 
     public void QuitGame(){
