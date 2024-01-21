@@ -6,7 +6,6 @@
 /[Tt]emp/
 /Temp/
 /[Oo]bj/
-/[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 /UserSettings/
@@ -60,7 +59,6 @@ sysinfo.txt
 *.apk
 *.aab
 *.unitypackage
-*.app
 
 # Crashlytics generated file
 crashlytics-build.properties
